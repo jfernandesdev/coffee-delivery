@@ -14,7 +14,7 @@ export const ContainerHome = styled.div`
   align-items: center;
   justify-content: center;
 
-  padding: 5.75rem 10rem;
+  padding: 5.75rem 10%;
 
   > img {
     width: 476px;
@@ -31,7 +31,7 @@ export const Title = styled.h1`
   margin-bottom: 1rem;
 `
 
-export const Subtitle = styled.h4`
+export const Text = styled.h4`
   font-size: 1.19rem;
   line-height: 1.62rem;
   color: ${(props) => props.theme['base-subtitle']};
@@ -76,4 +76,24 @@ export const CycleWithIcon = styled.span<CycleWithIconProps>`
 
   background: ${(props) => props.theme[CYCLE_COLORS[props.bgColor]]};
   color: ${(props) => props.theme.background};
+`
+
+export const ContainerProducts = styled.div`
+  padding: 0 10%;
+`
+
+export const Subtitle = styled.h2`
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 2.6rem;
+  color: ${(props) => props.theme['base-subtitle']};
+  margin-bottom: 3.3rem;
+`
+
+export const ListProducts = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem 1.5rem;
+  margin-bottom: 6.5rem;
 `

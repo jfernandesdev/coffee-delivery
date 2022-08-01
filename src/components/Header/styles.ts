@@ -4,9 +4,14 @@ export const ContainerNav = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 10rem;
+  padding: 2rem 10%;
   height: 6.5rem;
   background: ${(props) => props.theme.background};
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 
   > div {
     display: flex;
@@ -63,10 +68,10 @@ export const CartButton = styled.button`
     border-radius: 50%;
     font-weight: 700;
     font-size: 0.75rem;
-    line-height: 1rem;
     text-align: center;
     top: -0.5rem;
     right: -0.53rem;
+    flex-shrink: 0;
 
     display: flex;
     align-items: center;
