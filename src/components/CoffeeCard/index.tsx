@@ -14,6 +14,7 @@ import {
 import { CountButton } from '../CountButton'
 
 import expresso from '../../assets/expresso.png'
+import { NavLink } from 'react-router-dom'
 
 export function CoffeeCard() {
   return (
@@ -39,9 +40,11 @@ export function CoffeeCard() {
         <ButtonsWrapper>
           <CountButton />
 
-          <CartButton type="button" title="Adicionar no carrinho">
-            <ShoppingCart weight="fill" size={22} />
-          </CartButton>
+          <NavLink to="checkout">
+            <CartButton type="button" title="Adicionar no carrinho">
+              <ShoppingCart weight="fill" size={22} />
+            </CartButton>
+          </NavLink>
         </ButtonsWrapper>
       </CardFooter>
     </Card>

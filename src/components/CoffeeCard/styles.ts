@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Card = styled.div`
   height: 310px;
-  max-width: 256px;
+  min-width: 256px;
   background: ${(props) => props.theme['base-card']};
   border-radius: 6px 36px;
   display: flex;
@@ -10,6 +10,7 @@ export const Card = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 24px 20px;
+  margin: auto;
 `
 
 export const CardHeader = styled.div`

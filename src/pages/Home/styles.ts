@@ -94,6 +94,6 @@ export const Subtitle = styled.h2`
 export const ListProducts = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2.5rem 1.5rem;
+  gap: 2.5rem 2rem;
   margin-bottom: 6.5rem;
 `
