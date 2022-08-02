@@ -20,6 +20,10 @@ import {
   Optional,
   PaymentMethods,
   InputRadio,
+  CoffeeSelectedWrapper,
+  CoffeeSelectedItem,
+  TotalOrder,
+  RemoveButton,
 } from './styles'
 
 export function Checkout() {
@@ -121,18 +125,49 @@ export function Checkout() {
 
       <div>
         <SectionTitle>Cafés selecionado</SectionTitle>
-        <div>
-          <img src={expresso} alt="" />
-          <span>Expresso Tradicional</span>
-          <CountButton />
-          <button>
-            <Trash /> REMOVER
-          </button>
-          <span>R$ 9,90</span>
+
+        <CoffeeSelectedWrapper>
+          <CoffeeSelectedItem>
+            <div>
+              <img src={expresso} alt="" />
+
+              <div className="infoOrder">
+                <span className="productName">Expresso Tradicional</span>
+                <div className="btnActions">
+                  <CountButton />
+                  <RemoveButton type="button">
+                    <Trash size={16} /> REMOVER
+                  </RemoveButton>
+                </div>
+              </div>
+            </div>
+
+            <span className="price">R$ 9,90</span>
+          </CoffeeSelectedItem>
 
           <hr />
 
-          <div>
+          <CoffeeSelectedItem>
+            <div>
+              <img src={expresso} alt="" />
+
+              <div className="infoOrder">
+                <span className="productName">Expresso Tradicional</span>
+                <div className="btnActions">
+                  <CountButton />
+                  <RemoveButton type="button">
+                    <Trash size={16} /> REMOVER
+                  </RemoveButton>
+                </div>
+              </div>
+            </div>
+
+            <span className="price">R$ 9,90</span>
+          </CoffeeSelectedItem>
+
+          <hr />
+
+          <TotalOrder>
             <div>
               <span>Total de itens</span>
               <span>R$ 29,70</span>
@@ -143,14 +178,14 @@ export function Checkout() {
               <span>R$ 3,50</span>
             </div>
 
-            <div>
+            <div className="total">
               <span>Total</span>
               <span>R$ 33,20</span>
             </div>
-          </div>
+          </TotalOrder>
 
-          <button>Confirmar Pedido</button>
-        </div>
+          <button type="submit">Confirmar Pedido</button>
+        </CoffeeSelectedWrapper>
       </div>
     </FormContainer>
   )

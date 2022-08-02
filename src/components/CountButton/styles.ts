@@ -5,8 +5,6 @@ export const WrapperCountButton = styled.div`
   align-items: center;
   justify-content: center;
   gap: 4px;
-  margin-left: 1.44rem;
-
   width: 4.5rem;
   height: 2.38rem;
   padding: 0.5rem;
