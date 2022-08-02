@@ -28,7 +28,7 @@ import {
 
 export function Checkout() {
   return (
-    <FormContainer>
+    <FormContainer action="checkout/success">
       <div>
         <SectionTitle>Complete seu pedido</SectionTitle>
         <div>
