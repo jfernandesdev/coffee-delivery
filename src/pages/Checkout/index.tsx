@@ -7,8 +7,9 @@ import {
   Trash,
 } from 'phosphor-react'
 
-import expresso from '../../assets/expresso.png'
 import { CountButton } from '../../components/CountButton'
+import { useCart } from '../../hooks/useCart'
+import { formatPrice } from '../../utils/formatPrice'
 
 import {
   FormContainer,
@@ -24,9 +25,12 @@ import {
   CoffeeSelectedItem,
   TotalOrder,
   RemoveButton,
+  ListCart,
 } from './styles'
 
 export function Checkout() {
+  const { cart } = useCart()
+
   return (
     <FormContainer action="checkout/success">
       <div>
@@ -127,45 +131,27 @@ export function Checkout() {
         <SectionTitle>Cafés selecionado</SectionTitle>
 
         <CoffeeSelectedWrapper>
-          <CoffeeSelectedItem>
-            <div>
-              <img src={expresso} alt="" />
+          <ListCart>
+            {cart.map((item) => (
+              <CoffeeSelectedItem key={item.id}>
+                <div>
+                  <img src={item.image} alt={item.title} />
 
-              <div className="infoOrder">
-                <span className="productName">Expresso Tradicional</span>
-                <div className="btnActions">
-                  <CountButton />
-                  <RemoveButton type="button">
-                    <Trash size={16} /> REMOVER
-                  </RemoveButton>
+                  <div className="infoOrder">
+                    <span className="productName">{item.title}</span>
+                    <div className="btnActions">
+                      <CountButton />
+                      <RemoveButton type="button">
+                        <Trash size={16} /> REMOVER
+                      </RemoveButton>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <span className="price">R$ 9,90</span>
-          </CoffeeSelectedItem>
-
-          <hr />
-
-          <CoffeeSelectedItem>
-            <div>
-              <img src={expresso} alt="" />
-
-              <div className="infoOrder">
-                <span className="productName">Expresso Tradicional</span>
-                <div className="btnActions">
-                  <CountButton />
-                  <RemoveButton type="button">
-                    <Trash size={16} /> REMOVER
-                  </RemoveButton>
-                </div>
-              </div>
-            </div>
-
-            <span className="price">R$ 9,90</span>
-          </CoffeeSelectedItem>
-
-          <hr />
+                <span className="price">R$ {formatPrice(item.price)}</span>
+              </CoffeeSelectedItem>
+            ))}
+          </ListCart>
 
           <TotalOrder>
             <div>

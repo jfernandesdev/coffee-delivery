@@ -7,16 +7,16 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
 
     &::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
+      width: 10px;
+      height: 4px;
     }
     &::-webkit-scrollbar-track {
       background: transparent;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: ${(props) => props.theme['base-label']};
+      background-color: ${(props) => props.theme['base-hover']};
       border-radius: 20px;
-      border: 0.9px solid ${(props) => props.theme.background};
+      border: 3.5px solid ${(props) => props.theme['base-card']};
     }
   }
 

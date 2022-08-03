@@ -12,12 +12,11 @@ import {
 } from './styles'
 
 import { CountButton } from '../CountButton'
-
-import { NavLink } from 'react-router-dom'
+import { useCart } from '../../hooks/useCart'
 
 interface CoffeeCardProps {
   product: {
-    slug: string
+    id: string
     title: string
     description: string
     tags: string[]
@@ -27,6 +26,12 @@ interface CoffeeCardProps {
 }
 
 export function CoffeeCard({ product }: CoffeeCardProps) {
+  const { addProduct } = useCart()
+
+  function handleAddProduct(id: string) {
+    addProduct(id)
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -51,11 +56,13 @@ export function CoffeeCard({ product }: CoffeeCardProps) {
         <ButtonsWrapper>
           <CountButton />
 
-          <NavLink to="checkout">
-            <CartButton type="button" title="Adicionar no carrinho">
-              <ShoppingCart weight="fill" size={22} />
-            </CartButton>
-          </NavLink>
+          <CartButton
+            type="button"
+            title="Adicionar no carrinho"
+            onClick={() => handleAddProduct(product.id)}
+          >
+            <ShoppingCart weight="fill" size={22} />
+          </CartButton>
         </ButtonsWrapper>
       </CardFooter>
     </Card>

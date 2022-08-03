@@ -186,18 +186,14 @@ export const CoffeeSelectedWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-
-  hr {
-    height: 0;
-    border: 1px solid ${(props) => props.theme['base-button']};
-  }
 `
 
 export const CoffeeSelectedItem = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 0.5rem 0.25rem;
+  padding: 0.5rem 0.25rem 1.5rem;
+  border-bottom: 1px solid ${(props) => props.theme['base-button']};
 
   > div {
     display: flex;
@@ -297,4 +293,10 @@ export const RemoveButton = styled.button`
   > svg {
     color: ${(props) => props.theme.purple};
   }
+`
+
+export const ListCart = styled.div`
+  overflow-y: scroll;
+  max-height: 250px;
+  margin-right: -0.5rem;
 `

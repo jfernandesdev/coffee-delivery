@@ -19,7 +19,7 @@ import {
 import mockupHome from '../../assets/banner-intro.png'
 
 interface Product {
-  slug: string
+  id: string
   title: string
   description: string
   tags: string[]
@@ -101,7 +101,7 @@ export function Home() {
 
         <ListProducts>
           {products.map((product) => (
-            <CoffeeCard product={product} key={product.slug} />
+            <CoffeeCard product={product} key={product.id} />
           ))}
         </ListProducts>
       </ContainerProducts>

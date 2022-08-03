@@ -4,12 +4,15 @@ import { MapPin, ShoppingCart } from 'phosphor-react'
 
 import logoCoffeeDelivery from '../../assets/logo-coffee-delivery.svg'
 import { NavLink } from 'react-router-dom'
+import { useCart } from '../../hooks/useCart'
 
 interface HeaderProps {
   hasFixed?: boolean
 }
 
 export function Header({ hasFixed = false }: HeaderProps) {
+  const { cart } = useCart()
+
   return (
     <ContainerNav className={hasFixed ? 'navbarFixed' : ''}>
       <NavLink to="/">
@@ -24,7 +27,7 @@ export function Header({ hasFixed = false }: HeaderProps) {
         <NavLink to="checkout">
           <CartButton type="button">
             <ShoppingCart weight="fill" size={22} />
-            <span>3</span>
+            <span>{cart ? cart.length : '0'}</span>
           </CartButton>
         </NavLink>
       </div>
