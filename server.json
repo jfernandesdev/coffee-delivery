@@ -1,0 +1,116 @@
+{
+  "products": [
+    {
+      "slug": "expresso-tradicional",
+      "title": "Expresso Tradicional",
+      "description": "O tradicional café feito com água quente e grãos moídos",
+      "tags": ["Tradicional"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526973/coffee-delivery/expresso_zqcvqp.png"
+    },
+    {
+      "slug": "expresso-americano",
+      "title": "Expresso Americano",
+      "description": "Expresso diluído, menos intenso que o tradicional",
+      "tags": ["Tradicional"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526973/coffee-delivery/americano_cev5xu.png"
+    },
+    {
+      "slug": "expresso-cremoso",
+      "title": "Expresso Cremoso",
+      "description": "Café expresso tradicional com espuma cremosa",
+      "tags": ["Tradicional"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526973/coffee-delivery/expresso-cremoso_oc7isq.png"
+    },
+    {
+      "slug": "expresso-gelado",
+      "title": "Expresso Gelado",
+      "description": "Bebida preparada com café expresso e cubos de gelo",
+      "tags": ["Tradicional", "Gelado"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526974/coffee-delivery/cafe-gelado_z8h1y1.png"
+    },
+    {
+      "slug": "cafe-com-leite",
+      "title": "Café com Leite",
+      "description": "Meio a meio de expresso tradicional com leite vaporizado",
+      "tags": ["Tradicional", "Com Leite"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526973/coffee-delivery/cafe-com-leite_mmunjz.png"
+    },
+    {
+      "slug": "latte",
+      "title": "Latte",
+      "description": "Uma dose de café expresso com o dobro de leite e espuma cremosa",
+      "tags": ["Tradicional", "Com Leite"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526974/coffee-delivery/latte_zwfs3y.png"
+    },
+    {
+      "slug": "capuccino",
+      "title": "Capuccino",
+      "description": "Bebida com canela feita de doses iguais de café, leite e espuma",
+      "tags": ["Tradicional", "Com Leite"],
+      "price": 9.90, 
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526973/coffee-delivery/capuccino_tvavox.png"
+    },
+    {
+      "slug": "macchiato",
+      "title": "Macchiato",
+      "description": "Café expresso misturado com um pouco de leite quente e espuma",
+      "tags": ["Tradicional", "Com Leite"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526973/coffee-delivery/macchiato_pczhar.png"
+    },
+    {
+      "slug": "mocaccino",
+      "title": "Mocaccino",
+      "description": "Café expresso com calda de chocolate, pouco leite e espuma",
+      "tags": ["Tradicional", "Com Leite"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526973/coffee-delivery/mochaccino_l7ecn5.png"
+    },
+    {
+      "slug": "chocolate-quente",
+      "title": "Chocolate Quente",
+      "description": "Bebida feita com chocolate dissolvido no leite quente e café",
+      "tags": ["Especial", "Com Leite"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526973/coffee-delivery/chocolate-quente_wmuudv.png"
+    },
+    {
+      "slug": "cubano",
+      "title": "Cubano",
+      "description": "Drink gelado de café expresso com rum, creme de leite e hortelã",
+      "tags": ["Especial", "Alcoólico", "Gelado"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526973/coffee-delivery/cubano_eahelq.png"
+    },
+    {
+      "slug": "havaiano",
+      "title": "Havaiano",
+      "description": "Bebida adocicada preparada com café e leite de coco",
+      "tags": ["Especial"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526973/coffee-delivery/havaiano_rpz8iq.png"
+    },
+    {
+      "slug": "arabe",
+      "title": "Árabe",
+      "description": "Bebida preparada com grãos de café árabe e especiarias",
+      "tags": ["Especial"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526973/coffee-delivery/arabe_alzhqq.png"
+    },
+    {
+      "slug": "irlandes",
+      "title": "Irlandês",
+      "description": "Bebida a base de café, uísque irlandês, açúcar e chantilly ",
+      "tags": ["Especial", "Alcoólico"],
+      "price": 9.90,
+      "image": "https://res.cloudinary.com/jfernandes-dev/image/upload/v1659526973/coffee-delivery/irlandes_gctuni.png"
+    }
+  ]
+}

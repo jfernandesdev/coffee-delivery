@@ -8,10 +8,14 @@ export const ContainerNav = styled.div`
   height: 6.5rem;
   background: ${(props) => props.theme.background};
 
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+
+  &.navbarFixed {
+    position: fixed;
+  }
 
   > div {
     display: flex;

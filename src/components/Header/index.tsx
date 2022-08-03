@@ -5,9 +5,13 @@ import { MapPin, ShoppingCart } from 'phosphor-react'
 import logoCoffeeDelivery from '../../assets/logo-coffee-delivery.svg'
 import { NavLink } from 'react-router-dom'
 
-export function Header() {
+interface HeaderProps {
+  hasFixed?: boolean
+}
+
+export function Header({ hasFixed = false }: HeaderProps) {
   return (
-    <ContainerNav>
+    <ContainerNav className={hasFixed ? 'navbarFixed' : ''}>
       <NavLink to="/">
         <img src={logoCoffeeDelivery} alt="Coffee Delivery" />
       </NavLink>

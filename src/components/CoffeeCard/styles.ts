@@ -9,7 +9,7 @@ export const Card = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px 20px;
+  padding: 0 20px 20px;
   margin: auto;
 `
 

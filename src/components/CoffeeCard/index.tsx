@@ -13,28 +13,39 @@ import {
 
 import { CountButton } from '../CountButton'
 
-import expresso from '../../assets/expresso.png'
 import { NavLink } from 'react-router-dom'
 
-export function CoffeeCard() {
+interface CoffeeCardProps {
+  product: {
+    slug: string
+    title: string
+    description: string
+    tags: string[]
+    priceFormatted: string
+    image: string
+  }
+}
+
+export function CoffeeCard({ product }: CoffeeCardProps) {
   return (
     <Card>
       <CardHeader>
-        <img src={expresso} alt="Expresso Tradicional" />
+        <img src={product.image} alt="Expresso Tradicional" />
         <Tags>
-          <span>Tradicional</span>
-          <span>Com leite</span>
+          {product.tags.map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
         </Tags>
       </CardHeader>
 
       <CardBody>
-        <h6>Expresso Tradicional</h6>
-        <p>O tradicional café feito com água quente e grãos moídos</p>
+        <h6>{product.title}</h6>
+        <p>{product.description}</p>
       </CardBody>
 
       <CardFooter>
         <Price>
-          R$ <b>9,90</b>
+          R$ <b>{product.priceFormatted}</b>
         </Price>
 
         <ButtonsWrapper>

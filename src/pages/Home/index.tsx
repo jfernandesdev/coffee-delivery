@@ -1,3 +1,10 @@
+import { useState, useEffect } from 'react'
+import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
+
+import { api } from '../../services/api'
+import { formatPrice } from '../../utils/formatPrice'
+import { CoffeeCard } from '../../components/CoffeeCard'
+
 import {
   ContainerHome,
   Title,
@@ -10,9 +17,37 @@ import {
 } from './styles'
 
 import mockupHome from '../../assets/banner-intro.png'
-import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react'
-import { CoffeeCard } from '../../components/CoffeeCard'
+
+interface Product {
+  slug: string
+  title: string
+  description: string
+  tags: string[]
+  price: number
+  image: string
+}
+
+interface ProductFormatted extends Product {
+  priceFormatted: string
+}
+
 export function Home() {
+  const [products, setProducts] = useState<ProductFormatted[]>([])
+
+  useEffect(() => {
+    async function loadProducts() {
+      const response = await api.get<Product[]>('/products')
+
+      const data = response.data.map((product) => ({
+        ...product,
+        priceFormatted: formatPrice(product.price),
+      }))
+      setProducts(data)
+    }
+
+    loadProducts()
+  }, [])
+
   return (
     <>
       <ContainerHome>
@@ -65,8 +100,8 @@ export function Home() {
         <Subtitle>Nossos cafés</Subtitle>
 
         <ListProducts>
-          {Array.from({ length: 14 }).map((_, index) => (
-            <CoffeeCard key={index} />
+          {products.map((product) => (
+            <CoffeeCard product={product} key={product.slug} />
           ))}
         </ListProducts>
       </ContainerProducts>
