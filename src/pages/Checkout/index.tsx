@@ -30,10 +30,27 @@ import {
 
 export function Checkout() {
   const { cart, removeProduct } = useCart()
+  const shippingPrice = cart.length > 0 ? 3.5 : 0
+  const formattedShippingPrice = formatPrice(shippingPrice)
+
+  const cartFormatted = cart.map((product) => ({
+    ...product,
+    priceFormatted: formatPrice(product.price),
+    subTotal: formatPrice(product.price * product.amount),
+  }))
 
   function handleRemoveProduct(productId: string) {
     removeProduct(productId)
   }
+
+  const calculateTotalItems = cart.reduce((sumTotal, product) => {
+    return sumTotal + product.price * product.amount
+  }, 0)
+
+  const totalItemsFormatted = formatPrice(calculateTotalItems)
+  const totalWithShippingFormatted = formatPrice(
+    calculateTotalItems + shippingPrice,
+  )
 
   return (
     <FormContainer action="checkout/success">
@@ -136,7 +153,7 @@ export function Checkout() {
 
         <CoffeeSelectedWrapper>
           <ListCart>
-            {cart.map((item) => (
+            {cartFormatted.map((item) => (
               <CoffeeSelectedItem key={item.id}>
                 <div>
                   <img src={item.image} alt={item.title} />
@@ -157,7 +174,7 @@ export function Checkout() {
                   </div>
                 </div>
 
-                <span className="price">R$ {formatPrice(item.price)}</span>
+                <span className="price">R$ {item.subTotal}</span>
               </CoffeeSelectedItem>
             ))}
           </ListCart>
@@ -165,17 +182,17 @@ export function Checkout() {
           <TotalOrder>
             <div>
               <span>Total de itens</span>
-              <span>R$ 29,70</span>
+              <span>R$ {totalItemsFormatted}</span>
             </div>
 
             <div>
               <span>Entrega</span>
-              <span>R$ 3,50</span>
+              <span>R$ {formattedShippingPrice}</span>
             </div>
 
             <div className="total">
               <span>Total</span>
-              <span>R$ 33,20</span>
+              <span>R$ {totalWithShippingFormatted}</span>
             </div>
           </TotalOrder>
 
