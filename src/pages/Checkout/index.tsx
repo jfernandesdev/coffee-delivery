@@ -29,7 +29,11 @@ import {
 } from './styles'
 
 export function Checkout() {
-  const { cart } = useCart()
+  const { cart, removeProduct } = useCart()
+
+  function handleRemoveProduct(productId: string) {
+    removeProduct(productId)
+  }
 
   return (
     <FormContainer action="checkout/success">
@@ -142,7 +146,11 @@ export function Checkout() {
                     <div className="btnActions">
                       <CountButton />
                       {item.amount}
-                      <RemoveButton type="button">
+
+                      <RemoveButton
+                        type="button"
+                        onClick={() => handleRemoveProduct(item.id)}
+                      >
                         <Trash size={16} /> REMOVER
                       </RemoveButton>
                     </div>
