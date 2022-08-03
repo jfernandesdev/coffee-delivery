@@ -141,6 +141,7 @@ export function Checkout() {
                     <span className="productName">{item.title}</span>
                     <div className="btnActions">
                       <CountButton />
+                      {item.amount}
                       <RemoveButton type="button">
                         <Trash size={16} /> REMOVER
                       </RemoveButton>
