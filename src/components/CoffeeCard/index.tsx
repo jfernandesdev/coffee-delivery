@@ -1,4 +1,5 @@
-import { ShoppingCart } from 'phosphor-react'
+import { useState, ChangeEvent } from 'react'
+import { ShoppingCart, Minus, Plus } from 'phosphor-react'
 
 import {
   Card,
@@ -9,9 +10,9 @@ import {
   Price,
   ButtonsWrapper,
   CartButton,
+  WrapperCountButton,
 } from './styles'
 
-import { CountButton } from '../CountButton'
 import { useCart } from '../../hooks/useCart'
 
 interface CoffeeCardProps {
@@ -28,8 +29,24 @@ interface CoffeeCardProps {
 export function CoffeeCard({ product }: CoffeeCardProps) {
   const { addProduct } = useCart()
 
-  function handleAddProduct(id: string) {
-    addProduct(id)
+  const [amount, setAmount] = useState(1)
+
+  function onDecrementAmount() {
+    amount - 1 > 0 && setAmount(amount - 1)
+  }
+
+  function onIncrementAmount() {
+    amount + 1 <= 10 && setAmount(amount + 1)
+  }
+
+  function handleChangeCount(event: ChangeEvent<HTMLInputElement>) {
+    if (event.target.valueAsNumber > 0 && event.target.valueAsNumber <= 10) {
+      setAmount(event.target.valueAsNumber)
+    }
+  }
+
+  function handleAddProduct(id: string, amount: number) {
+    addProduct(id, amount)
   }
 
   return (
@@ -54,12 +71,28 @@ export function CoffeeCard({ product }: CoffeeCardProps) {
         </Price>
 
         <ButtonsWrapper>
-          <CountButton />
+          <WrapperCountButton>
+            <button type="button" onClick={onDecrementAmount}>
+              <Minus size={14} weight="bold" />
+            </button>
+
+            <input
+              type="number"
+              min={1}
+              max={10}
+              onChange={handleChangeCount}
+              value={amount}
+            />
+
+            <button type="button" onClick={onIncrementAmount}>
+              <Plus size={14} weight="bold" />
+            </button>
+          </WrapperCountButton>
 
           <CartButton
             type="button"
             title="Adicionar no carrinho"
-            onClick={() => handleAddProduct(product.id)}
+            onClick={() => handleAddProduct(product.id, amount)}
           >
             <ShoppingCart weight="fill" size={22} />
           </CartButton>

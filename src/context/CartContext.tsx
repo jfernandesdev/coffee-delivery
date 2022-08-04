@@ -11,10 +11,16 @@ interface Product {
   amount: number
 }
 
+interface UpdateProductAmount {
+  productId: string
+  amount: number
+}
+
 export interface CartContextData {
   cart: Product[]
-  addProduct: (productId: string) => Promise<void>
+  addProduct: (productId: string, amount: number) => Promise<void>
   removeProduct: (productId: string) => void
+  updateProductAmount: ({ productId, amount }: UpdateProductAmount) => void
 }
 
 interface CartProviderProps {
@@ -26,15 +32,12 @@ export const CartContext = createContext<CartContextData>({} as CartContextData)
 export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<Product[]>([])
 
-  async function addProduct(productId: string) {
+  async function addProduct(productId: string, amount: number) {
     try {
       const updatedCart = [...cart]
       const productExists = updatedCart.find(
         (product) => product.id === productId,
       )
-
-      const currentAmount = productExists ? productExists.amount : 0
-      const amount = currentAmount + 1
 
       if (productExists) {
         productExists.amount = amount
@@ -43,7 +46,7 @@ export function CartProvider({ children }: CartProviderProps) {
 
         const newProduct = {
           ...product.data,
-          amount: 1,
+          amount,
         }
 
         updatedCart.push(newProduct)
@@ -73,8 +76,32 @@ export function CartProvider({ children }: CartProviderProps) {
     }
   }
 
+  function updateProductAmount({ productId, amount }: UpdateProductAmount) {
+    try {
+      if (amount <= 0 || amount > 10) {
+        return
+      }
+
+      const updatedCart = [...cart]
+      const productExists = updatedCart.find(
+        (product) => product.id === productId,
+      )
+
+      if (productExists) {
+        productExists.amount = amount
+        setCart(updatedCart)
+      } else {
+        throw Error()
+      }
+    } catch {
+      console.log('Erro na alteração da quantidade do produto')
+    }
+  }
+
   return (
-    <CartContext.Provider value={{ cart, addProduct, removeProduct }}>
+    <CartContext.Provider
+      value={{ cart, addProduct, removeProduct, updateProductAmount }}
+    >
       {children}
     </CartContext.Provider>
   )

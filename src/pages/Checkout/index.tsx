@@ -3,11 +3,13 @@ import {
   CreditCard,
   CurrencyDollar,
   MapPinLine,
+  Minus,
   Money,
+  Plus,
   Trash,
 } from 'phosphor-react'
+import { WrapperCountButton } from '../../components/CoffeeCard/styles'
 
-import { CountButton } from '../../components/CountButton'
 import { useCart } from '../../hooks/useCart'
 import { formatPrice } from '../../utils/formatPrice'
 
@@ -28,8 +30,16 @@ import {
   ListCart,
 } from './styles'
 
+interface Product {
+  id: string
+  title: string
+  price: number
+  image: string
+  amount: number
+}
+
 export function Checkout() {
-  const { cart, removeProduct } = useCart()
+  const { cart, removeProduct, updateProductAmount } = useCart()
   const shippingPrice = cart.length > 0 ? 3.5 : 0
   const formattedShippingPrice = formatPrice(shippingPrice)
 
@@ -41,6 +51,20 @@ export function Checkout() {
 
   function handleRemoveProduct(productId: string) {
     removeProduct(productId)
+  }
+
+  function handleProductIncrement(product: Product) {
+    updateProductAmount({
+      productId: product.id,
+      amount: product.amount + 1,
+    })
+  }
+
+  function handleProductDecrement(product: Product) {
+    updateProductAmount({
+      productId: product.id,
+      amount: product.amount - 1,
+    })
   }
 
   const calculateTotalItems = cart.reduce((sumTotal, product) => {
@@ -161,8 +185,29 @@ export function Checkout() {
                   <div className="infoOrder">
                     <span className="productName">{item.title}</span>
                     <div className="btnActions">
-                      <CountButton />
-                      {item.amount}
+                      <WrapperCountButton>
+                        <button
+                          type="button"
+                          onClick={() => handleProductDecrement(item)}
+                        >
+                          <Minus size={14} weight="bold" />
+                        </button>
+
+                        <input
+                          type="number"
+                          min={1}
+                          max={10}
+                          readOnly
+                          value={item.amount}
+                        />
+
+                        <button
+                          type="button"
+                          onClick={() => handleProductIncrement(item)}
+                        >
+                          <Plus size={14} weight="bold" />
+                        </button>
+                      </WrapperCountButton>
 
                       <RemoveButton
                         type="button"
