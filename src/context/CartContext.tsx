@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react'
+import { createContext, ReactNode, useState, useRef, useEffect } from 'react'
 import { api } from '../services/api'
 
 interface Product {
@@ -30,7 +30,29 @@ interface CartProviderProps {
 export const CartContext = createContext<CartContextData>({} as CartContextData)
 
 export function CartProvider({ children }: CartProviderProps) {
-  const [cart, setCart] = useState<Product[]>([])
+  const [cart, setCart] = useState<Product[]>(() => {
+    const storageCart = localStorage.getItem('@CoffeeDelivery:cart')
+
+    if (storageCart) {
+      return JSON.parse(storageCart)
+    }
+
+    return []
+  })
+
+  const prevCartRef = useRef<Product[]>()
+
+  useEffect(() => {
+    prevCartRef.current = cart
+  })
+
+  const cartPreviousValue = prevCartRef.current ?? cart
+
+  useEffect(() => {
+    if (cartPreviousValue !== cart) {
+      localStorage.setItem('@CoffeeDelivery:cart', JSON.stringify(cart))
+    }
+  }, [cart, cartPreviousValue])
 
   async function addProduct(productId: string, amount: number) {
     try {
