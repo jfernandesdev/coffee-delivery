@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'styled-components'
 import { BrowserRouter } from 'react-router-dom'
 import { Router } from './Router'
+import { ToastContainer } from 'react-toastify'
 
 import { CartProvider } from './context/CartContext'
 
@@ -13,9 +14,14 @@ export function App() {
       <BrowserRouter>
         <CartProvider>
           <Router />
+          <GlobalStyle />
+          <ToastContainer
+            autoClose={2000}
+            theme="colored"
+            position="bottom-right"
+          />
         </CartProvider>
       </BrowserRouter>
-      <GlobalStyle />
     </ThemeProvider>
   )
 }

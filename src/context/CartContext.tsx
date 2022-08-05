@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState, useRef, useEffect } from 'react'
+import { toast } from 'react-toastify'
 import { api } from '../services/api'
 
 interface Product {
@@ -75,8 +76,9 @@ export function CartProvider({ children }: CartProviderProps) {
       }
 
       setCart(updatedCart)
+      toast.success('Produto adicionado no carrinho!')
     } catch {
-      console.log('Erro na adição do produto')
+      toast.error('Erro na adição do produto. Tente novamente!')
     }
   }
 
@@ -90,11 +92,12 @@ export function CartProvider({ children }: CartProviderProps) {
       if (productIndex >= 0) {
         updatedCart.splice(productIndex, 1)
         setCart(updatedCart)
+        toast.info('Item removido do carrinho!')
       } else {
         throw Error()
       }
     } catch {
-      console.log('Erro na remoção do produto')
+      toast.error('Erro na remoção do produto. Tente novamente!')
     }
   }
 
@@ -116,7 +119,9 @@ export function CartProvider({ children }: CartProviderProps) {
         throw Error()
       }
     } catch {
-      console.log('Erro na alteração da quantidade do produto')
+      toast.error(
+        'Erro na alteração da quantidade do produto. Tente novamente!',
+      )
     }
   }
 
