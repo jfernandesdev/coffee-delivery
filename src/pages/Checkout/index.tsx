@@ -1,34 +1,24 @@
-import {
-  Bank,
-  CreditCard,
-  CurrencyDollar,
-  MapPinLine,
-  Minus,
-  Money,
-  Plus,
-  Trash,
-} from 'phosphor-react'
-import { WrapperCountButton } from '../../components/CoffeeCard/styles'
-
 import { useCart } from '../../hooks/useCart'
 import { formatPrice } from '../../utils/formatPrice'
+
+import { FormProvider, useForm } from 'react-hook-form'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { FormCheckout } from '../../components/FormCheckout'
 
 import {
   FormContainer,
   SectionTitle,
-  Wrapper,
-  WrapperHeader,
-  WrapperBody,
-  Input,
-  Optional,
-  PaymentMethods,
-  InputRadio,
   CoffeeSelectedWrapper,
   CoffeeSelectedItem,
   TotalOrder,
   RemoveButton,
   ListCart,
 } from './styles'
+
+import { WrapperCountButton } from '../../components/CoffeeCard/styles'
+
+import { Minus, Plus, Trash } from 'phosphor-react'
 
 interface Product {
   id: string
@@ -37,6 +27,19 @@ interface Product {
   image: string
   amount: number
 }
+
+const newOrderFormValidationSchema = zod.object({
+  cep: zod.string().min(8, 'Informe o CEP para entrega'),
+  street: zod.string().min(1, 'Informe a rua para entrega'),
+  number: zod.string().min(1, 'Informe o número para entrega'),
+  complement: zod.string(),
+  district: zod.string().min(1, 'Informe o bairro para entrega'),
+  city: zod.string().min(1, 'Informe a cidade'),
+  uf: zod.string().length(2, 'O UF precisa ter 2 caracteres'),
+  paymentMethod: zod.string(),
+})
+
+type NewOrderFormData = zod.infer<typeof newOrderFormValidationSchema>
 
 export function Checkout() {
   const { cart, removeProduct, updateProductAmount } = useCart()
@@ -76,101 +79,33 @@ export function Checkout() {
     calculateTotalItems + shippingPrice,
   )
 
+  const newOrderForm = useForm<NewOrderFormData>({
+    resolver: zodResolver(newOrderFormValidationSchema),
+    defaultValues: {
+      cep: '',
+      street: '',
+      number: '',
+      complement: '',
+      district: '',
+      city: '',
+      uf: '',
+      paymentMethod: 'Cartão de Crédito',
+    },
+  })
+
+  const { handleSubmit, watch, reset } = newOrderForm
+  watch('paymentMethod')
+
+  function handleCreateNewOrder(data: NewOrderFormData) {
+    console.log(JSON.stringify(data))
+    reset()
+  }
+
   return (
-    <FormContainer action="checkout/success">
-      <div>
-        <SectionTitle>Complete seu pedido</SectionTitle>
-        <div>
-          <Wrapper>
-            <WrapperHeader colorIcon="yellow">
-              <MapPinLine size={22} />
-              <div>
-                <p>Endereço de Entrega</p>
-                <span>Informe o endereço onde deseja receber seu pedido</span>
-              </div>
-            </WrapperHeader>
-
-            <WrapperBody>
-              <div className="grid-33-e-1f">
-                <Input type="text" placeholder="CEP" />
-              </div>
-
-              <Input type="text" placeholder="Rua" />
-
-              <div className="grid-33-e-1f">
-                <Input type="text" placeholder="Número" />
-
-                <Optional>
-                  <Input
-                    type="text"
-                    id="complemento"
-                    placeholder="Complemento"
-                  />
-                  <label htmlFor="complemento">Opcional</label>
-                </Optional>
-              </div>
-
-              <div className="grid-33-1fr-60px">
-                <Input type="text" placeholder="Bairro" />
-                <Input type="text" placeholder="Cidade" />
-                <Input type="text" placeholder="UF" />
-              </div>
-            </WrapperBody>
-          </Wrapper>
-
-          <Wrapper>
-            <WrapperHeader colorIcon="purple">
-              <CurrencyDollar size={22} />
-              <div>
-                <p>Pagamento</p>
-                <span>
-                  O pagamento é feito na entrega. Escolha a forma que deseja
-                  pagar
-                </span>
-              </div>
-            </WrapperHeader>
-
-            <PaymentMethods>
-              <InputRadio>
-                <input
-                  type="radio"
-                  id="cartao-credito"
-                  value="Cartão de Crédito"
-                  name="paymentMethods"
-                />
-                <label htmlFor="cartao-credito">
-                  <CreditCard size={16} />
-                  Cartão de Crédito
-                </label>
-              </InputRadio>
-
-              <InputRadio>
-                <input
-                  type="radio"
-                  id="cartao-debito"
-                  value="Cartão de Débito"
-                  name="paymentMethods"
-                />
-                <label htmlFor="cartao-debito">
-                  <Bank size={16} /> Cartão de Débito
-                </label>
-              </InputRadio>
-
-              <InputRadio>
-                <input
-                  type="radio"
-                  id="dinheiro"
-                  value="Dinheiro"
-                  name="paymentMethods"
-                />
-                <label htmlFor="dinheiro">
-                  <Money size={16} /> Dinheiro
-                </label>
-              </InputRadio>
-            </PaymentMethods>
-          </Wrapper>
-        </div>
-      </div>
+    <FormContainer onSubmit={handleSubmit(handleCreateNewOrder)}>
+      <FormProvider {...newOrderForm}>
+        <FormCheckout />
+      </FormProvider>
 
       <div>
         <SectionTitle>Cafés selecionado</SectionTitle>
@@ -193,13 +128,7 @@ export function Checkout() {
                           <Minus size={14} weight="bold" />
                         </button>
 
-                        <input
-                          type="number"
-                          min={1}
-                          max={10}
-                          readOnly
-                          value={item.amount}
-                        />
+                        <input type="text" readOnly value={item.amount} />
 
                         <button
                           type="button"

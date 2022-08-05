@@ -17,7 +17,7 @@ export function App() {
           <GlobalStyle />
           <ToastContainer
             autoClose={2000}
-            theme="colored"
+            theme="light"
             position="bottom-right"
           />
         </CartProvider>
