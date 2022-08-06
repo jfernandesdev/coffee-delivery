@@ -28,6 +28,11 @@ export const FormContainer = styled.form`
       opacity: 0.6;
     }
   }
+
+  @media (max-width: 768px) {
+    display: block;
+    padding: 5%;
+  }
 `
 
 export const SectionTitle = styled.h3`
@@ -46,6 +51,10 @@ export const CoffeeSelectedWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    padding: 2rem 2rem 2rem 1rem;
+  }
 `
 
 export const CoffeeSelectedItem = styled.div`
@@ -58,15 +67,25 @@ export const CoffeeSelectedItem = styled.div`
   > div {
     display: flex;
     gap: 1.25rem;
+
+    @media (max-width: 768px) {
+      gap: 0.5rem;
+    }
   }
 
   img {
     width: 64px;
     height: 64px;
+
+    @media (max-width: 768px) {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   .price {
     font-weight: 700;
+    white-space: nowrap;
   }
 
   .productName {

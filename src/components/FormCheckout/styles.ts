@@ -14,6 +14,10 @@ export const Wrapper = styled.div`
   border-radius: 6px;
   background: ${(props) => props.theme['base-card']};
   margin-bottom: 0.75rem;
+
+  @media (max-width: 768px) {
+    padding: 2rem;
+  }
 `
 
 const ICON_COLORS = {
@@ -53,12 +57,22 @@ export const WrapperBody = styled.div`
     display: grid;
     grid-template-columns: 33% 1fr;
     gap: 0.75rem;
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   .grid-33-1fr-60px {
     display: grid;
     grid-template-columns: 33% 1fr 60px;
     gap: 0.75rem;
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+    }
   }
 `
 
@@ -129,13 +143,18 @@ export const PaymentMethods = styled.div`
       color: ${(props) => props.theme.purple};
     }
   }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 export const InputRadio = styled.div`
   input[type='radio'] {
-    /* display: none; */
     width: 0;
     height: 0;
+    position: absolute;
 
     &:focus {
       box-shadow: none;

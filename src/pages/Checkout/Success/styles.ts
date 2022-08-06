@@ -24,6 +24,21 @@ export const ContainerSuccess = styled.div`
     gap: 6.3rem;
     margin-top: 2.5rem;
   }
+
+  @media (max-width: 768px) {
+    padding: 5%;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+
+      > img {
+        width: 100%;
+      }
+    }
+  }
 `
 
 export const InfoOrder = styled.ul`
@@ -40,7 +55,6 @@ export const InfoOrder = styled.ul`
 
     span {
       line-height: 1.3rem;
-      /* max-width: 60%; */
     }
   }
 `

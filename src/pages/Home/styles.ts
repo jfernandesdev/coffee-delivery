@@ -20,6 +20,17 @@ export const ContainerHome = styled.div`
     width: 476px;
     height: 360px;
   }
+
+  @media (max-width: 768px) {
+    display: block;
+    padding: 8% 5%;
+    height: auto;
+
+    > img {
+      width: 100%;
+      height: auto;
+    }
+  }
 `
 
 export const Title = styled.h1`
@@ -29,6 +40,15 @@ export const Title = styled.h1`
   line-height: 3.8rem;
   color: ${(props) => props.theme['base-title']};
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 2.1em;
+    line-height: 2.5rem;
+
+    > br {
+      display: none;
+    }
+  }
 `
 
 export const Text = styled.h4`
@@ -37,7 +57,10 @@ export const Text = styled.h4`
   color: ${(props) => props.theme['base-subtitle']};
   font-weight: 400;
   font-stretch: 100;
-  white-space: nowrap;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `
 
 export const ListFeatures = styled.ul`
@@ -52,6 +75,15 @@ export const ListFeatures = styled.ul`
     align-items: center;
     gap: 0.75rem;
     line-height: 1.32rem;
+
+    @media (max-width: 768px) {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
 `
 const CYCLE_COLORS = {
@@ -96,4 +128,9 @@ export const ListProducts = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 2.5rem 2rem;
   margin-bottom: 6.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    margin-bottom: 3rem;
+  }
 `

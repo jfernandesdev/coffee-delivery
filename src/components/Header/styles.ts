@@ -22,6 +22,11 @@ export const ContainerNav = styled.div`
     align-items: center;
     gap: 12px;
   }
+
+  @media (max-width: 768px) {
+    height: 5rem;
+    padding: 2rem 5%;
+  }
 `
 
 export const LocationTag = styled.div`
@@ -58,9 +63,14 @@ export const CartButton = styled.button`
   cursor: pointer;
   transition: background 0.2s color 0.2s;
 
-  &:hover {
+  &:not(:disabled):hover {
     background: ${(props) => props.theme.yellow};
     color: ${(props) => props.theme.white};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
   }
 
   > span {
