@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "server": "json-server server.json -p 3333",
+    "server": "json-server db.json -p 3333",
     "lint": "eslint src --ext .ts,.tsx"
   },
   "dependencies": {
