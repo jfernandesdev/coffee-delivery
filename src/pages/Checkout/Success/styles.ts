@@ -40,7 +40,7 @@ export const InfoOrder = styled.ul`
 
     span {
       line-height: 1.3rem;
-      max-width: 60%;
+      /* max-width: 60%; */
     }
   }
 `

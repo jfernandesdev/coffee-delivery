@@ -42,7 +42,7 @@ const newOrderFormValidationSchema = zod.object({
 type NewOrderFormData = zod.infer<typeof newOrderFormValidationSchema>
 
 export function Checkout() {
-  const { cart, removeProduct, updateProductAmount } = useCart()
+  const { cart, removeProduct, updateProductAmount, addNewOrder } = useCart()
   const shippingPrice = cart.length > 0 ? 3.5 : 0
   const formattedShippingPrice = formatPrice(shippingPrice)
 
@@ -97,7 +97,32 @@ export function Checkout() {
   watch('paymentMethod')
 
   function handleCreateNewOrder(data: NewOrderFormData) {
-    console.log(JSON.stringify(data))
+    const newOrder = {
+      id: '1',
+      address: {
+        cep: data.cep,
+        street: data.street,
+        number: data.number,
+        complement: data.complement,
+        district: data.district,
+        city: data.city,
+        uf: data.uf,
+      },
+      paymentMethod: data.paymentMethod,
+      orderedItems: cart.map((product) => {
+        return {
+          idProduct: product.id,
+          nameProduct: product.title,
+          price: product.price,
+          amount: product.amount,
+        }
+      }),
+      totalItems: calculateTotalItems,
+      shippingPrice,
+      orderDate: new Date(),
+    }
+
+    addNewOrder(newOrder)
     reset()
   }
 
@@ -170,7 +195,9 @@ export function Checkout() {
             </div>
           </TotalOrder>
 
-          <button type="submit">Confirmar Pedido</button>
+          <button type="submit" disabled={cart.length === 0}>
+            Confirmar Pedido
+          </button>
         </CoffeeSelectedWrapper>
       </div>
     </FormContainer>

@@ -1,9 +1,20 @@
+import { Navigate } from 'react-router-dom'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import illustrationSuccess from '../../../assets/illustration-success.png'
 import { CycleWithIcon } from '../../Home/styles'
 import { ContainerSuccess, OrderWrapper, InfoOrder } from './styles'
 
+import { NewOrderData } from '../../../context/CartContext'
+import { formatPrice } from '../../../utils/formatPrice'
+
 export function Success() {
+  const order: NewOrderData | null = JSON.parse(
+    `${localStorage.getItem('@CoffeeDelivery:order')}`,
+  )
+
+  if (!order) {
+    return <Navigate to="/" />
+  }
   return (
     <ContainerSuccess>
       <h1>Uhu! Pedido confirmado</h1>
@@ -17,7 +28,13 @@ export function Success() {
                 <MapPin size={16} weight="fill" />
               </CycleWithIcon>
               <span>
-                Entrega em <b>Rua dos Bugs, 101</b> - Centro - Lavras, MG
+                Entrega em{' '}
+                <b>
+                  {`${order?.address.street} , ${order?.address.number}`}
+                  {` - ${order?.address.district}`}
+                  <br />
+                  {`${order?.address.cep} - ${order?.address.city} / ${order?.address.uf}`}
+                </b>
               </span>
             </li>
             <li>
@@ -35,7 +52,9 @@ export function Success() {
               <span>
                 Pagamento na Entrega
                 <br />
-                <b>Cartão de crédito</b>
+                <b>{`R$ ${formatPrice(
+                  order?.totalItems + order?.shippingPrice,
+                )} - ${order?.paymentMethod} `}</b>
               </span>
             </li>
           </InfoOrder>

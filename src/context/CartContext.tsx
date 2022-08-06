@@ -17,15 +17,39 @@ interface UpdateProductAmount {
   amount: number
 }
 
+interface CartProviderProps {
+  children: ReactNode
+}
+
+export interface NewOrderData {
+  id: string
+  address: {
+    cep: string
+    street: string
+    number: string
+    complement?: string
+    district: string
+    city: string
+    uf: string
+  }
+  paymentMethod: string
+  orderedItems: {
+    idProduct: string
+    nameProduct: string
+    price: number
+    amount: number
+  }[]
+  totalItems: number
+  shippingPrice: number
+  orderDate: Date
+}
+
 export interface CartContextData {
   cart: Product[]
   addProduct: (productId: string, amount: number) => Promise<void>
   removeProduct: (productId: string) => void
   updateProductAmount: ({ productId, amount }: UpdateProductAmount) => void
-}
-
-interface CartProviderProps {
-  children: ReactNode
+  addNewOrder: (data: NewOrderData) => void
 }
 
 export const CartContext = createContext<CartContextData>({} as CartContextData)
@@ -125,9 +149,21 @@ export function CartProvider({ children }: CartProviderProps) {
     }
   }
 
+  function addNewOrder(data: NewOrderData) {
+    localStorage.setItem('@CoffeeDelivery:order', JSON.stringify(data))
+    localStorage.removeItem('@CoffeeDelivery:cart')
+    window.location.href = '/checkout/success'
+  }
+
   return (
     <CartContext.Provider
-      value={{ cart, addProduct, removeProduct, updateProductAmount }}
+      value={{
+        cart,
+        addProduct,
+        removeProduct,
+        updateProductAmount,
+        addNewOrder,
+      }}
     >
       {children}
     </CartContext.Provider>

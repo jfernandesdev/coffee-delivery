@@ -16,7 +16,17 @@ export const FormContainer = styled.form`
     font-size: 0.75rem;
     text-transform: uppercase;
     font-stretch: 100;
+    transition: background 0.2s color 0.2s;
     cursor: pointer;
+
+    &:not(:disabled):hover {
+      background: ${(props) => props.theme['yellow-dark']};
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
   }
 `
 
