@@ -29,22 +29,19 @@ O projeto trata-se de uma aplicação para gerenciar um carrinho de compras de u
 ## Instalação em sua máquina ⚙️
 
 ```
-# Clone o projeto e acesse a pasta:
+// Clone o projeto e acesse a pasta:
 $ git clone https://github.com/jfernandesdev/coffee-delivery.git && cd coffee-delivery
 
-# Instale as dependências:
+// Instale as dependências:
 $ yarn
 
-# Rode localmente a API fake (json-server) para listagem dos produtos
-# e altere a baseURL da API em 'services/api': 
+// Rode localmente a API fake (json-server) para listagem dos produtos, e altere a baseURL da API em 'services/api': 
 $ yarn server
 
-# Rode o projeto: 
+// Rode o projeto: 
 $ yarn dev
 
-
 // A aplicação estará disponível em seu navegador em http://localhost:3000
-
 ```
 
 ## Layout (design by @millenakmartins) 🤩
@@ -71,4 +68,4 @@ https://jfernandesdev-coffee-delivery.vercel.app/
 
 <br>
 
-<img src="https://i.ibb.co/n1SbQZw/w-signature.png" alt="w-signature" border="0" width='300px' />
+<img src="https://i.ibb.co/Yckq764/footer-signature.png" alt="footer-signature" border="0"  width='400px' />
