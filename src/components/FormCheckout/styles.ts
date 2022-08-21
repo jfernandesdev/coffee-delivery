@@ -102,6 +102,32 @@ export const Input = styled.input`
   }
 `
 
+export const InputGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+
+  button {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 35px;
+    color: ${(props) => props.theme['base-label']};
+    background: transparent;
+    border: 0;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    :hover {
+      color: ${(props) => props.theme['yellow-dark']};
+      background: ${(props) => props.theme['yellow-light']};
+    }
+  }
+`
+
 export const Optional = styled.div`
   position: relative;
   display: flex;

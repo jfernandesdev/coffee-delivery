@@ -1,9 +1,13 @@
 import { useFormContext } from 'react-hook-form'
+import { getAddressByCEP } from 'cep-address-finder'
+import InputMask from 'react-input-mask'
+import { toast } from 'react-toastify'
 
 import {
   Bank,
   CreditCard,
   CurrencyDollar,
+  MagnifyingGlass,
   MapPinLine,
   Money,
 } from 'phosphor-react'
@@ -14,14 +18,37 @@ import {
   WrapperHeader,
   WrapperBody,
   Input,
+  InputGroup,
   Optional,
   PaymentMethods,
   InputRadio,
 } from './styles'
 
 export function FormCheckout() {
-  const { register, formState } = useFormContext()
+  const { register, formState, setValue, getValues, setFocus } =
+    useFormContext()
   const { errors } = formState
+
+  async function handleAddressAutocomplete() {
+    const cepInput = getValues('cep')
+
+    if (cepInput.length >= 8) {
+      try {
+        const address = await getAddressByCEP(cepInput)
+
+        setValue('street', address.street)
+        setValue('complement', address.complement)
+        setValue('district', address.neighborhood)
+        setValue('city', address.city)
+        setValue('uf', address.state)
+      } catch (err) {
+        toast.error(`${err}`)
+      }
+    } else {
+      toast.error('CEP deve conter exatamente 8 números.')
+      setFocus('cep')
+    }
+  }
 
   return (
     <>
@@ -39,12 +66,19 @@ export function FormCheckout() {
 
             <WrapperBody>
               <div className="grid-33-e-1f">
-                <Input
-                  type="text"
-                  placeholder="CEP"
-                  {...register('cep')}
-                  className={errors.cep ? 'error' : ''}
-                />
+                <InputGroup>
+                  <Input
+                    type="text"
+                    placeholder="CEP"
+                    as={InputMask}
+                    mask="99.999-999"
+                    {...register('cep')}
+                    className={errors.cep ? 'error' : ''}
+                  />
+                  <button type="button" onClick={handleAddressAutocomplete}>
+                    <MagnifyingGlass size={18} weight="bold" />
+                  </button>
+                </InputGroup>
               </div>
 
               <Input
