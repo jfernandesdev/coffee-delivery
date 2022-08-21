@@ -10,6 +10,7 @@ O projeto trata-se de uma aplicação para gerenciar um carrinho de compras de u
 - [x] Adicionar uma quantidade específicas de itens no carrinho;
 - [x] Aumentar ou remover a quantidade de itens no carrinho;
 - [x] Formulário para o usuário preencher o seu endereço e forma de pagamento;
+- [x] Obter o endereço pelo CEP informado e preencher os campos automaticamente;
 - [x] Exibir o total de itens no carrinho no Header;
 - [x] Exibir o valor total da soma de itens no carrinho multiplicados pelo valor;
 - [x] Layout responsivo (mobile e desktop).
@@ -35,7 +36,7 @@ $ git clone https://github.com/jfernandesdev/coffee-delivery.git && cd coffee-de
 // Instale as dependências:
 $ yarn
 
-// Rode localmente a API fake (json-server) para listagem dos produtos, e altere a baseURL da API em 'services/api': 
+// Rode localmente a API fake (json-server) para listagem dos produtos e altere a baseURL da API em 'services/api' (ou use a que disponibilizei online): 
 $ yarn server
 
 // Rode o projeto: 
@@ -64,7 +65,7 @@ $ yarn dev
 
 ### Dê uma olhada como o projeto ficou! 👀
 
-https://jfernandesdev-coffee-delivery.vercel.app/
+https://coffee-delivery-jfernandesdev.vercel.app/
 
 <br>
 
