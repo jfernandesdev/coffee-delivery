@@ -15,7 +15,7 @@ import {
 
 import { useCart } from '../../hooks/useCart'
 
-interface CoffeeCardProps {
+export interface CoffeeCardProps {
   product: {
     id: string
     title: string
@@ -45,9 +45,9 @@ export function CoffeeCard({ product }: CoffeeCardProps) {
     }
   }
 
-  function handleAddProduct(id: string, amount: number) {
-    addProduct(id, amount)
-  }
+  // function handleAddProduct(id: string, amount: number) {
+  //   addProduct(id, amount)
+  // }
 
   return (
     <Card>
@@ -72,7 +72,11 @@ export function CoffeeCard({ product }: CoffeeCardProps) {
 
         <ButtonsWrapper>
           <WrapperCountButton>
-            <button type="button" onClick={onDecrementAmount}>
+            <button
+              type="button"
+              onClick={onDecrementAmount}
+              data-testid="decrement-amount"
+            >
               <Minus size={14} weight="bold" />
             </button>
 
@@ -82,9 +86,14 @@ export function CoffeeCard({ product }: CoffeeCardProps) {
               max={10}
               onChange={handleChangeCount}
               value={amount}
+              data-testid="amount-input"
             />
 
-            <button type="button" onClick={onIncrementAmount}>
+            <button
+              type="button"
+              onClick={onIncrementAmount}
+              data-testid="increment-amount"
+            >
               <Plus size={14} weight="bold" />
             </button>
           </WrapperCountButton>
@@ -92,7 +101,8 @@ export function CoffeeCard({ product }: CoffeeCardProps) {
           <CartButton
             type="button"
             title="Adicionar no carrinho"
-            onClick={() => handleAddProduct(product.id, amount)}
+            onClick={() => addProduct(product.id, amount)}
+            data-testid="add-to-cart-button"
           >
             <ShoppingCart weight="fill" size={22} />
           </CartButton>
