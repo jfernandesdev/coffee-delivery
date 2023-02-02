@@ -14,7 +14,10 @@ export function Header({ hasFixed = false }: HeaderProps) {
   const { cart } = useCart()
 
   return (
-    <ContainerNav className={hasFixed ? 'navbarFixed' : ''}>
+    <ContainerNav
+      className={hasFixed ? 'navbarFixed' : ''}
+      data-testid="container-nav"
+    >
       <NavLink to="/">
         <img src={logoCoffeeDelivery} alt="Coffee Delivery" />
       </NavLink>
